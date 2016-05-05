@@ -5,15 +5,15 @@ import numpy
 def act(observation, reward, done):
     
     #debugging
-    print observation
+    #print observation
     myAction = 0
-    if(observation[3] < -.15):
+    if(observation[3] < -.000002):
         myAction = 0
     
-    if(observation[3] > .15):
+    if(observation[3] > .000002):
         myAction = 1
     
-    print myAction
+    #print myAction
     action = myAction
     
     #print(action)
@@ -31,11 +31,13 @@ for i_episode in xrange(20):
     reward = 0
     done = False
     
-    for t in xrange(100):
+    for t in xrange(200):
         env.render()
         #print observation
+        #print env.action_space
         action = act(observation, reward, done)
         observation, reward, done, info = env.step(action)
+        
         if done:
             timestamps.append(t+1) 
             print "Episode finished after {} timesteps ".format(t+1)
